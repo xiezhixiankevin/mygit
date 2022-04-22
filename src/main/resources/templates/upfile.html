@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>上传页面</title>
+</head>
+<body>
+  <form action="#" th:action="@{/upload}" method="post" enctype="multipart/form-data">
+<!--    <input type="hidden" name="Pid" th:value="${Pid}">-->
+<!--    <input type="hidden" name="submitUserId" th:value="${session.user.id}">-->
+    <input type="file" name="upload"><br>
+      <input type="hidden" name="fid" th:value="${fid}">
+      文件描述:<textarea name="fileDescribe" th:text="${fileDescribe}" cols="30" rows="10"></textarea> <br>
+      文件日志:<textarea name="filelog" th:text="${filelog}" cols="30" rows="10"></textarea>
+    <input type="submit" value="提交文件">
+  </form>
+
+</body>
+</html>

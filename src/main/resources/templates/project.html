@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>项目详情</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
+</head>
+<body>
+  项目名:<span>DBMS</span>
+  当前项目所有文件列表： &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{|/file/toAddFile/${Pid}|}" href="#">新增文件</a><br>
+  <form action="" th:if="${session.user.id == projecthostId}" th:action="@{/project/addUser}" method="post">
+    <input type="hidden" name="pid" th:value="${Pid}">
+    添加项目人员: <input type="text" name="addUser" list="list">
+    <datalist id="list">
+      <option value="aaa" th:each="user : ${userList}" th:value="${user.id}" th:text="${user.username}"></option>
+    </datalist>
+    <input type="submit">
+  </form>
+  <table class="mt">
+    <tr>
+      <th>文件id</th>
+      <th>文件名</th>
+      <th>文件说明</th>
+      <th>最近修改人</th>
+      <th>最近修改日志</th>
+      <th>最近未上传人</th>
+      <th>操作</th>
+    </tr>
+    <tr th:each="file : ${fileList}">
+      <td th:text="${file.id}">1</td>
+      <td th:text="${file.fname}">index.cpp</td>
+      <td><button id="button1" th:onclick="'javascript:showDs('+${file.id}+')'">查看</button></td>
+      <td th:text="${file.latestChangeUserName}">谢志贤</td>
+      <td><button id="button2" th:onclick="'javascript:showlog('+${file.id}+')'">查看</button></td>
+      <td th:text="${file.latestLoadName}">谢志贤</td>
+      <td>
+        <a href="#" th:href="@{|/fileDown/${file.projectName}/${file.fname}/${file.id}/${session.user.id}|}">下载</a>|
+        <a href="#" th:href="@{|/file/toloadFile/${Pid}/${file.id}|}">上传</a>
+      </td>
+      <input type="hidden" th:id="|D${file.id}|" th:value="${file.fdescribe}">
+      <input type="hidden" th:id="|L${file.id}|" th:value="${file.latestlog}">
+    </tr>
+  </table>
+
+</body>
+
+  <script>
+    function showDs(id){
+      var data = document.getElementById("D"+id).value;
+      alert(data);
+    }
+    function showlog(id){
+      var data = document.getElementById("L"+id).value;
+      alert(data);
+    }
+
+  </script>
+
+</html>

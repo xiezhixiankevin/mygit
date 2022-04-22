@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mygit首页</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    当前用户:<span th:text="${session.user.username}">谢志贤</span>
+    你参与的项目列表如下:
+    <table class="mt">
+        <tr>
+            <th>项目id</th>
+            <th>项目名</th>
+            <th>项目负责人</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="project : ${session.projectList}">
+            <td th:text="${project.id}">1</td>
+            <td th:text="${project.pname}">DBMS</td>
+            <td th:text="${project.hostName}">谢志贤</td>
+            <td><a th:href="@{|/project/intoProject/${project.id}|}">进入</a></td>
+        </tr>
+    </table>
+   <a th:href="@{/toCreateProject}">新建项目</a>
+</body>
+</html>
