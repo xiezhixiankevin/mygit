@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MygitApplication {
 
     public static void main(String[] args) {
+        System.out.println("xzxzxzx");
         SpringApplication.run(MygitApplication.class, args);
     }
 
